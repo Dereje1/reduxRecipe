@@ -118,7 +118,7 @@ class UserModal extends React.Component{
     }
     return(
       <div>
-      <Button bsStyle={openerButtonType} bsSize={openerButtonSize} onClick={this.open.bind(this)}>{buttonTitle}</Button>
+      <Button bsStyle={openerButtonType} bsSize={openerButtonSize} onClick={this.open.bind(this)}>{buttonTitle} </Button>
       <div className="modal-container">
         <Modal
           show={this.state.show}

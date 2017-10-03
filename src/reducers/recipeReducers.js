@@ -8,6 +8,7 @@ export function recipeReducer(state=defaultRecipes,action){
       break;
     case "ADD_RECIPE":
       //must redeclare everything as brand new!!
+      if(action.payload[0].name.trim()===""){return {recipes: [...state.recipes]}}
       let newRecipesObject = {recipes: [...state.recipes,...action.payload]}
       return newRecipesObject;
       break;
@@ -38,7 +39,7 @@ export function recipeReducer(state=defaultRecipes,action){
 const defaultRecipes = {
   recipes:[
     {
-      name: "Kitfo",
+      name: "Frog Legs",
       ingredients:["beef","butter","pepper"]
     },
     {

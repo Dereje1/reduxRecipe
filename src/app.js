@@ -1,12 +1,15 @@
 "use strict"
 import {applyMiddleware, createStore} from 'redux';
 import logger from 'redux-logger';
-//modules for react
+//modules for/realted with react
 import React from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
+import {Router, Route, IndexRoute,browserHistory} from 'react-router';
 //main react component (RecipeBook)
+import Main from './main'
 import RecipeBook from './components/recipeBook'
+
 //modules I made myself
 import {recipeReducer} from './reducers/recipeReducers'
 import {addRecipe,deleteRecipe,getRecipes} from './actions/recipeActions'
@@ -16,24 +19,15 @@ const middleware = applyMiddleware(logger)
 const store = createStore(recipeReducer,middleware)
 
 //allows you to provide/link the store , ie. redux states to the react component
-render (
-  <Provider store={store}>
-    <RecipeBook />
-  </Provider>,
-  document.getElementById('app'))
+//route declaration
+const Routes = (
+<Provider store={store}>
+  <Router history={browserHistory}>
+    <Route path="/" component={Main}>
+      <IndexRoute component={RecipeBook}/>
+    </Route>
+  </Router>
+</Provider>
+)
 
-
-
-/* test redux dispatch model
-store.dispatch(addRecipe(
-  [
-    {
-    name: "Potbelly Sandwich",
-    ingredients:["Roast Beef Sandwich","Loaded Chilli","Strawberry MilkShake"]
-    }
-  ]
-))
-
-store.dispatch(deleteRecipe("Cheeseburger"))
-store.dispatch(getRecipes())
-*/
+render (Routes,document.getElementById('app'))
