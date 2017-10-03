@@ -5,8 +5,8 @@ class Main extends React.Component{
     render(){
       return (
         <div style={{"backgroundColor":"black","paddingBottom":"10px"}}>
-          <Menu />
-          {this.props.children}
+          <Menu/>
+            {this.props.children}
         </div>
       )
     }

@@ -1,3 +1,4 @@
+"use strict"
 import React from 'react'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux';
@@ -118,25 +119,25 @@ class UserModal extends React.Component{
     }
     return(
       <div>
-      <Button bsStyle={openerButtonType} bsSize={openerButtonSize} onClick={this.open.bind(this)}>{buttonTitle} </Button>
-      <div className="modal-container">
-        <Modal
-          show={this.state.show}
-          onHide={this.close.bind(this)}
-          container={this}
-          aria-labelledby="contained-modal-title"
-        >
-          <Modal.Header closeButton>
-            <Modal.Title id="contained-modal-title">{modalTitle}</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {this.formRenderType()}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={this.handleChange.bind(this)} bsStyle={buttonType}>{buttonTitle}</Button><Button onClick={this.close.bind(this)}>Close</Button>
-          </Modal.Footer>
-        </Modal>
-      </div>
+        <Button bsStyle={openerButtonType} bsSize={openerButtonSize} onClick={this.open.bind(this)}>{buttonTitle} </Button>
+        <div className="modal-container">
+            <Modal
+              show={this.state.show}
+              onHide={this.close.bind(this)}
+              container={this}
+              aria-labelledby="contained-modal-title"
+            >
+              <Modal.Header closeButton>
+                <Modal.Title id="contained-modal-title">{modalTitle}</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                {this.formRenderType()}
+              </Modal.Body>
+              <Modal.Footer>
+                <Button onClick={this.handleChange.bind(this)} bsStyle={buttonType}>{buttonTitle}</Button><Button onClick={this.close.bind(this)}>Close</Button>
+              </Modal.Footer>
+            </Modal>
+        </div>
       </div>
     )
   }
