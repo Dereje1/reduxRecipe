@@ -49627,7 +49627,7 @@ function recipeReducer() {
 
 var defaultRecipes = {
   recipes: [{
-    name: "Frog Legs",
+    name: "Kitfo",
     ingredients: ["beef", "butter", "pepper"]
   }, {
     name: "Steak Burrito",

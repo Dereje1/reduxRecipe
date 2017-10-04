@@ -39,7 +39,7 @@ export function recipeReducer(state=defaultRecipes,action){
 const defaultRecipes = {
   recipes:[
     {
-      name: "Frog Legs",
+      name: "Kitfo",
       ingredients:["beef","butter","pepper"]
     },
     {
