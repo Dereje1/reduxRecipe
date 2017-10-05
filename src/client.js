@@ -6,6 +6,7 @@ import React from 'react'
 import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router, Route, IndexRoute,browserHistory} from 'react-router';
+import thunk from 'redux-thunk';
 //main react component (RecipeBook)
 import Main from './main'
 import RecipeBook from './components/recipeBook'
@@ -15,7 +16,7 @@ import {recipeReducer} from './reducers/recipeReducers'
 import {addRecipe,deleteRecipe,getRecipes} from './actions/recipeActions'
 
 //store declaration
-const middleware = applyMiddleware(logger)
+const middleware = applyMiddleware(thunk,logger)
 const store = createStore(recipeReducer,middleware)
 
 //allows you to provide/link the store , ie. redux states to the react component

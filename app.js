@@ -66,18 +66,11 @@ app.put('/recipes/:_id', function(req, res){
    var recipeToUpdate = req.body;
    var recipeID = req.params._id;
    // if the field doesn't exist $set will set a new field
-   //if you leave any of the update fields out in the actual update
-   // then it will set that property to null in the database therefore it is best to
-   //just specify the property you want to update so the others remain intact, in this case
-   //just the ingredients
-   var update = {
-       '$set':{
-       ingredients:recipeToUpdate.ingredients
-       }
-    };
+   //change to findByIdAndUpdate to make it congruent with delete
+   var update = { '$set': {ingredients: recipeToUpdate.ingredients}};
    // When true returns the updated document
    var options = {new: true};
-   Recipes.findOneAndUpdate(recipeID, update, options, function(err, recipe){
+   Recipes.findByIdAndUpdate(recipeID, update, options, function(err, recipe){
        if(err){
          throw err;
        }

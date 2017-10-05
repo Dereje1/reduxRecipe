@@ -1,9 +1,9 @@
 "use strict"
-export function recipeReducer(state=defaultRecipes,action){
+export function recipeReducer(state={},action){
   switch (action.type) {
     case "GET_RECIPES":
       //must redeclare everything as brand new!!
-      let allRecipes =  [...state.recipes]
+      let allRecipes =  [...action.payload]
       return {recipes: allRecipes};
       break;
     case "ADD_RECIPE":
@@ -16,7 +16,7 @@ export function recipeReducer(state=defaultRecipes,action){
       //must redeclare everything as brand new!!
       let recipeCopy =  [...state.recipes]
       let indexOfDeletion = recipeCopy.findIndex(function(recipe){
-        return (recipe.name===action.payload)
+        return (recipe._id===action.payload)
       })
       let recipeRemoved = [...recipeCopy.slice(0,indexOfDeletion),...recipeCopy.slice(indexOfDeletion+1)]
 
@@ -26,8 +26,10 @@ export function recipeReducer(state=defaultRecipes,action){
       //must redeclare everything as brand new!!
       let recipeToBeUpdated =  [...state.recipes]
       let indexOfUpdate = recipeToBeUpdated.findIndex(function(recipe){
-        return (recipe.name===action.payload.name)
+        return (recipe._id===action.payload._id)
       })
+
+      //recipeToBeUpdated[indexOfUpdate].ingredients = action.payload.ingredients
       let recipeUpdated = [...recipeToBeUpdated.slice(0,indexOfUpdate),action.payload,...recipeToBeUpdated.slice(indexOfUpdate+1)]
 
       return {recipes: recipeUpdated};

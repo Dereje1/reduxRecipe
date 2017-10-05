@@ -40,7 +40,8 @@ class UserModal extends React.Component{
     else{
       this.props.updateRecipe(
         {
-          name:this.props.editInfo,
+          _id:this.props.editInfo,
+          name:this.props.name,
           ingredients:findDOMNode(this.refs.ingredients).value.split(",")
         }
       )
@@ -52,7 +53,7 @@ class UserModal extends React.Component{
 
     let focusRecipe = this.props.editInfo //for some reson this.props is not known inisde findindex call back
     let indexOfRecipe = this.props.recipes.findIndex(function(recipe){
-      return (recipe.name===focusRecipe)
+      return (recipe._id===focusRecipe)
     })
 
     return this.props.recipes[indexOfRecipe].ingredients.join(',')
