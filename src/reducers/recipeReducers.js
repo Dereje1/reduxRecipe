@@ -29,7 +29,6 @@ export function recipeReducer(state={},action){
         return (recipe._id===action.payload._id)
       })
 
-      //recipeToBeUpdated[indexOfUpdate].ingredients = action.payload.ingredients
       let recipeUpdated = [...recipeToBeUpdated.slice(0,indexOfUpdate),action.payload,...recipeToBeUpdated.slice(indexOfUpdate+1)]
 
       return {recipes: recipeUpdated};

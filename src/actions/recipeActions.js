@@ -4,7 +4,7 @@ import axios from 'axios';
 export function getRecipes(){
   console.log("Getting Recipes from DB!!")
   return function(dispatch){
-    axios.get("/recipes")
+    axios.get("/api/recipes")
     .then(function(response){//if request is fullfilled proceed with dispatch
       dispatch({type:"GET_RECIPES",payload:response.data})
     })
@@ -19,7 +19,7 @@ export function getRecipes(){
 // POST A BOOK
 export function addRecipe(recipe){
   return function(dispatch){
-    axios.post("/recipes",recipe)
+    axios.post("api/recipes",recipe)
     .then(function(response){//if request is fullfilled proceed with dispatch
       dispatch({type:"ADD_RECIPE",payload:response.data})
     })
@@ -37,7 +37,7 @@ export function addRecipe(recipe){
 // DELETE A BOOK
 export function deleteRecipe(id){
   return function(dispatch){
-    axios.delete("/recipes/"+id)
+    axios.delete("api/recipes/"+id)
       .then(function(response){
         dispatch({type:"DELETE_RECIPE",payload:id})
       })
@@ -56,7 +56,7 @@ export function deleteRecipe(id){
 // UPDATE A BOOK
 export function updateRecipe(recipeToUpdate){
   return function(dispatch){
-  axios.put("/recipes/"+recipeToUpdate._id,recipeToUpdate)
+  axios.put("api/recipes/"+recipeToUpdate._id,recipeToUpdate)
     .then(function(response){
       dispatch({type:"UPDATE_RECIPE",payload:response.data})
     })

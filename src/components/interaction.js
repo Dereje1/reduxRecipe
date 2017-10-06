@@ -29,6 +29,10 @@ class UserModal extends React.Component{
   }
   handleChange(){
     if(this.props.editInfo==="Add Recipe"){
+        if(!findDOMNode(this.refs.recipe).value){
+          this.close()
+          return;
+        }
         this.props.addRecipe([
           {
             name:findDOMNode(this.refs.recipe).value,
@@ -41,7 +45,6 @@ class UserModal extends React.Component{
       this.props.updateRecipe(
         {
           _id:this.props.editInfo,
-          name:this.props.name,
           ingredients:findDOMNode(this.refs.ingredients).value.split(",")
         }
       )
@@ -105,7 +108,11 @@ class UserModal extends React.Component{
   render(){
     //set variables for edit or addition that are to be included in modal
     if(this.props.editInfo!=="Add Recipe"){
-      var modalTitle= "Edit Ingredients For " + this.props.editInfo;
+      var indxRecipe = this.props.recipes.findIndex((r)=>{
+        return (r._id===this.props.editInfo)
+      })
+
+      var modalTitle= "Edit Ingredients For " + this.props.recipes[indxRecipe].name;
       var buttonTitle = "Update Recipe";
       var buttonType = "info";
       var openerButtonType = "info";

@@ -8368,7 +8368,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function getRecipes() {
   console.log("Getting Recipes from DB!!");
   return function (dispatch) {
-    _axios2.default.get("/recipes").then(function (response) {
+    _axios2.default.get("/api/recipes").then(function (response) {
       //if request is fullfilled proceed with dispatch
       dispatch({ type: "GET_RECIPES", payload: response.data });
     }).catch(function (err) {
@@ -8382,7 +8382,7 @@ function getRecipes() {
 // POST A BOOK
 function addRecipe(recipe) {
   return function (dispatch) {
-    _axios2.default.post("/recipes", recipe).then(function (response) {
+    _axios2.default.post("api/recipes", recipe).then(function (response) {
       //if request is fullfilled proceed with dispatch
       dispatch({ type: "ADD_RECIPE", payload: response.data });
     }).catch(function (err) {
@@ -8399,7 +8399,7 @@ function addRecipe(recipe) {
 // DELETE A BOOK
 function deleteRecipe(id) {
   return function (dispatch) {
-    _axios2.default.delete("/recipes/" + id).then(function (response) {
+    _axios2.default.delete("api/recipes/" + id).then(function (response) {
       dispatch({ type: "DELETE_RECIPE", payload: id });
     }).catch(function (err) {
       dispatch({ type: "DELETE_RECIPE_REJECTED", payload: "Unable to Delete Recipe from DB" });
@@ -8416,7 +8416,7 @@ function deleteRecipe(id) {
 // UPDATE A BOOK
 function updateRecipe(recipeToUpdate) {
   return function (dispatch) {
-    _axios2.default.put("/recipes/" + recipeToUpdate._id, recipeToUpdate).then(function (response) {
+    _axios2.default.put("api/recipes/" + recipeToUpdate._id, recipeToUpdate).then(function (response) {
       dispatch({ type: "UPDATE_RECIPE", payload: response.data });
     }).catch(function (err) {
       dispatch({ type: "UPDATE_RECIPE_REJECTED", payload: "Unable to Delete Recipe from DB" });
@@ -23030,6 +23030,10 @@ var UserModal = function (_React$Component) {
     key: 'handleChange',
     value: function handleChange() {
       if (this.props.editInfo === "Add Recipe") {
+        if (!(0, _reactDom.findDOMNode)(this.refs.recipe).value) {
+          this.close();
+          return;
+        }
         this.props.addRecipe([{
           name: (0, _reactDom.findDOMNode)(this.refs.recipe).value,
           ingredients: (0, _reactDom.findDOMNode)(this.refs.ingredients).value.split(",")
@@ -23038,7 +23042,6 @@ var UserModal = function (_React$Component) {
       } else {
         this.props.updateRecipe({
           _id: this.props.editInfo,
-          name: this.props.name,
           ingredients: (0, _reactDom.findDOMNode)(this.refs.ingredients).value.split(",")
         });
         this.close();
@@ -23122,9 +23125,15 @@ var UserModal = function (_React$Component) {
   }, {
     key: 'render',
     value: function render() {
+      var _this2 = this;
+
       //set variables for edit or addition that are to be included in modal
       if (this.props.editInfo !== "Add Recipe") {
-        var modalTitle = "Edit Ingredients For " + this.props.editInfo;
+        var indxRecipe = this.props.recipes.findIndex(function (r) {
+          return r._id === _this2.props.editInfo;
+        });
+
+        var modalTitle = "Edit Ingredients For " + this.props.recipes[indxRecipe].name;
         var buttonTitle = "Update Recipe";
         var buttonType = "info";
         var openerButtonType = "info";
@@ -49058,7 +49067,7 @@ var RecipeBook = function (_React$Component) {
             ),
             _react2.default.createElement(
               _reactBootstrap.Col,
-              { xs: 12, sm: 12, md: 12, className: 'text-center' },
+              { xs: 12, sm: 12, md: 12 },
               _react2.default.createElement(_interaction2.default, { editInfo: "Add Recipe" })
             )
           )
@@ -50185,7 +50194,6 @@ function recipeReducer() {
         return recipe._id === action.payload._id;
       });
 
-      //recipeToBeUpdated[indexOfUpdate].ingredients = action.payload.ingredients
       var recipeUpdated = [].concat(_toConsumableArray(recipeToBeUpdated.slice(0, indexOfUpdate)), [action.payload], _toConsumableArray(recipeToBeUpdated.slice(indexOfUpdate + 1)));
 
       return { recipes: recipeUpdated };

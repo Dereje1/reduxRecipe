@@ -19,7 +19,7 @@ class RecipeBook extends React.Component{
             <Col xs={12} sm={12} md={12} className="text-left">
               <Recipes />
             </Col>
-            <Col xs={12} sm={12} md={12} className="text-center">
+            <Col xs={12} sm={12} md={12}>
               <UserModal editInfo={"Add Recipe"}/>
             </Col>
           </Row>
