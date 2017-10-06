@@ -11,7 +11,7 @@ class Recipes extends React.Component{
     let allRecipes = this.props.recipes.map((recipe)=>{
       return(
         //Components to be returned for each recipe
-        <Accordion key={recipe._id}>
+        <Accordion key={recipe._id} style={{"marginBottom":"2px"}}>
         {/*React bootstrap accordiion*/}
           <Panel header={recipe.name} eventKey={recipe.name} style={{"cursor":"pointer"}}>
           {/*React bootstrap panel*/}

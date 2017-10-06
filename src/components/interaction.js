@@ -115,19 +115,24 @@ class UserModal extends React.Component{
       var modalTitle= "Edit Ingredients For " + this.props.recipes[indxRecipe].name;
       var buttonTitle = "Update Recipe";
       var buttonType = "info";
-      var openerButtonType = "info";
-      var openerButtonSize = "sm";
+      var modalOpenerButton = (
+        <div className="text-center">
+          <Button bsStyle="info" bsSize="sm" onClick={this.open.bind(this)}>{buttonTitle}</Button>
+        </div>)
     }
     else{
       var modalTitle= "Add A New Recipe ";
       var buttonTitle = "Add Recipe";
       var buttonType = "primary";
-      var openerButtonType = "warning";
-      var openerButtonSize = "large";
+      var modalOpenerButton = (
+        <div className="text-center" style={{"marginTop":"10px"}}>
+          <Button block bsStyle="warning" bsSize="large" onClick={this.open.bind(this)}>{buttonTitle} </Button>
+        </div>
+      )
     }
     return(
       <div>
-        <Button bsStyle={openerButtonType} bsSize={openerButtonSize} onClick={this.open.bind(this)}>{buttonTitle} </Button>
+        {modalOpenerButton}
         <div className="modal-container">
             <Modal
               show={this.state.show}
@@ -142,7 +147,8 @@ class UserModal extends React.Component{
                 {this.formRenderType()}
               </Modal.Body>
               <Modal.Footer>
-                <Button onClick={this.handleChange.bind(this)} bsStyle={buttonType}>{buttonTitle}</Button><Button onClick={this.close.bind(this)}>Close</Button>
+                <Button onClick={this.handleChange.bind(this)} bsStyle={buttonType}>{buttonTitle}</Button>
+                <Button onClick={this.close.bind(this)}>Close</Button>
               </Modal.Footer>
             </Modal>
         </div>

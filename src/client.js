@@ -7,10 +7,11 @@ import {render} from 'react-dom'
 import {Provider} from 'react-redux'
 import {Router, Route, IndexRoute,browserHistory} from 'react-router';
 import thunk from 'redux-thunk';
+
 //main react component (RecipeBook)
 import Main from './main'
 import RecipeBook from './components/recipeBook'
-
+import Signup from './components/signup'
 //modules I made myself
 import {recipeReducer} from './reducers/recipeReducers'
 import {addRecipe,deleteRecipe,getRecipes} from './actions/recipeActions'
@@ -26,6 +27,7 @@ const Routes = (
   <Router history={browserHistory}>
     <Route path="/" component={Main}>
       <IndexRoute component={RecipeBook}/>
+      <Route path="/signup" component={Signup}/>
     </Route>
   </Router>
 </Provider>

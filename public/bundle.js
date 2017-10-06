@@ -23136,24 +23136,34 @@ var UserModal = function (_React$Component) {
         var modalTitle = "Edit Ingredients For " + this.props.recipes[indxRecipe].name;
         var buttonTitle = "Update Recipe";
         var buttonType = "info";
-        var openerButtonType = "info";
-        var openerButtonSize = "sm";
+        var modalOpenerButton = _react2.default.createElement(
+          'div',
+          { className: 'text-center' },
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            { bsStyle: 'info', bsSize: 'sm', onClick: this.open.bind(this) },
+            buttonTitle
+          )
+        );
       } else {
         var modalTitle = "Add A New Recipe ";
         var buttonTitle = "Add Recipe";
         var buttonType = "primary";
-        var openerButtonType = "warning";
-        var openerButtonSize = "large";
+        var modalOpenerButton = _react2.default.createElement(
+          'div',
+          { className: 'text-center', style: { "marginTop": "10px" } },
+          _react2.default.createElement(
+            _reactBootstrap.Button,
+            { block: true, bsStyle: 'warning', bsSize: 'large', onClick: this.open.bind(this) },
+            buttonTitle,
+            ' '
+          )
+        );
       }
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(
-          _reactBootstrap.Button,
-          { bsStyle: openerButtonType, bsSize: openerButtonSize, onClick: this.open.bind(this) },
-          buttonTitle,
-          ' '
-        ),
+        modalOpenerButton,
         _react2.default.createElement(
           'div',
           { className: 'modal-container' },
@@ -23248,6 +23258,10 @@ var _recipeBook = __webpack_require__(546);
 
 var _recipeBook2 = _interopRequireDefault(_recipeBook);
 
+var _signup = __webpack_require__(569);
+
+var _signup2 = _interopRequireDefault(_signup);
+
 var _recipeReducers = __webpack_require__(568);
 
 var _recipeActions = __webpack_require__(95);
@@ -23256,12 +23270,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 //store declaration
 
-
 //modules I made myself
 
-//main react component (RecipeBook)
-var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default);
 //modules for/realted with react
+var middleware = (0, _redux.applyMiddleware)(_reduxThunk2.default, _reduxLogger2.default);
+
+//main react component (RecipeBook)
 
 var store = (0, _redux.createStore)(_recipeReducers.recipeReducer, middleware);
 
@@ -23276,7 +23290,8 @@ var Routes = _react2.default.createElement(
     _react2.default.createElement(
       _reactRouter.Route,
       { path: '/', component: _main2.default },
-      _react2.default.createElement(_reactRouter.IndexRoute, { component: _recipeBook2.default })
+      _react2.default.createElement(_reactRouter.IndexRoute, { component: _recipeBook2.default }),
+      _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signup2.default })
     )
   )
 );
@@ -37843,6 +37858,10 @@ var _menu = __webpack_require__(408);
 
 var _menu2 = _interopRequireDefault(_menu);
 
+var _footer = __webpack_require__(570);
+
+var _footer2 = _interopRequireDefault(_footer);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -37865,9 +37884,10 @@ var Main = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { style: { "backgroundColor": "black", "paddingBottom": "10px" } },
+        null,
         _react2.default.createElement(_menu2.default, null),
-        this.props.children
+        this.props.children,
+        _react2.default.createElement(_footer2.default, null)
       );
     }
   }]);
@@ -37918,7 +37938,7 @@ var Menu = function (_React$Component) {
     value: function render() {
       return _react2.default.createElement(
         _reactBootstrap.Navbar,
-        { inverse: true, collapseOnSelect: true },
+        { inverse: true, fixedTop: true },
         _react2.default.createElement(
           _reactBootstrap.Navbar.Header,
           null,
@@ -37928,7 +37948,7 @@ var Menu = function (_React$Component) {
             _react2.default.createElement(
               'a',
               { href: '/' },
-              'Recipe Box'
+              'Recipe Box Full Stack'
             )
           ),
           _react2.default.createElement(_reactBootstrap.Navbar.Toggle, null)
@@ -37941,13 +37961,8 @@ var Menu = function (_React$Component) {
             null,
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 1, href: '/about' },
+              { eventKey: 1, href: '/' },
               'About'
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.NavItem,
-              { eventKey: 2, href: '/contact' },
-              'Contacts'
             )
           ),
           _react2.default.createElement(
@@ -37955,8 +37970,8 @@ var Menu = function (_React$Component) {
             { pullRight: true },
             _react2.default.createElement(
               _reactBootstrap.NavItem,
-              { eventKey: 1, href: '/admin' },
-              'Admin'
+              { eventKey: 1, href: '/signup' },
+              'Sign Up'
             )
           )
         )
@@ -49055,29 +49070,29 @@ var RecipeBook = function (_React$Component) {
       if (this.props.recipes) {
         //check if state is not empty
         return _react2.default.createElement(
-          _reactBootstrap.Grid,
-          null,
+          'div',
+          { style: { "backgroundColor": "black", "paddingBottom": "10px" } },
           _react2.default.createElement(
-            _reactBootstrap.Row,
+            _reactBootstrap.Grid,
             null,
             _react2.default.createElement(
-              _reactBootstrap.Col,
-              { xs: 12, sm: 12, md: 12, className: 'text-left' },
-              _react2.default.createElement(_recipes2.default, null)
-            ),
-            _react2.default.createElement(
-              _reactBootstrap.Col,
-              { xs: 12, sm: 12, md: 12 },
-              _react2.default.createElement(_interaction2.default, { editInfo: "Add Recipe" })
+              _reactBootstrap.Row,
+              { style: { "marginTop": "10px" } },
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12, sm: 12, md: 12, className: 'text-left' },
+                _react2.default.createElement(_recipes2.default, null)
+              ),
+              _react2.default.createElement(
+                _reactBootstrap.Col,
+                { xs: 12, sm: 12, md: 12 },
+                _react2.default.createElement(_interaction2.default, { editInfo: "Add Recipe" })
+              )
             )
           )
         );
       } else {
-        return _react2.default.createElement(
-          'div',
-          null,
-          'Getting Recipes'
-        );
+        return _react2.default.createElement('div', { style: { "backgroundColor": "black", "paddingBottom": "10px" } });
       }
     }
   }]);
@@ -50029,7 +50044,7 @@ var Recipes = function (_React$Component) {
           //Components to be returned for each recipe
           _react2.default.createElement(
             _reactBootstrap.Accordion,
-            { key: recipe._id },
+            { key: recipe._id, style: { "marginBottom": "2px" } },
             _react2.default.createElement(
               _reactBootstrap.Panel,
               { header: recipe.name, eventKey: recipe.name, style: { "cursor": "pointer" } },
@@ -50214,6 +50229,119 @@ var defaultRecipes = {
     ingredients: ["freshly ground chuck", "American cheese", "large	burger buns"]
   }]
 };
+
+/***/ }),
+/* 569 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Signup = function (_React$Component) {
+  _inherits(Signup, _React$Component);
+
+  function Signup() {
+    _classCallCheck(this, Signup);
+
+    return _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).apply(this, arguments));
+  }
+
+  _createClass(Signup, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "h1",
+        null,
+        "This will be my signup form"
+      );
+    }
+  }]);
+
+  return Signup;
+}(_react2.default.Component);
+
+exports.default = Signup;
+
+/***/ }),
+/* 570 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Footer = function (_React$Component) {
+  _inherits(Footer, _React$Component);
+
+  function Footer() {
+    _classCallCheck(this, Footer);
+
+    return _possibleConstructorReturn(this, (Footer.__proto__ || Object.getPrototypeOf(Footer)).apply(this, arguments));
+  }
+
+  _createClass(Footer, [{
+    key: "render",
+    value: function render() {
+      return _react2.default.createElement(
+        "footer",
+        { className: "footer text-center" },
+        _react2.default.createElement(
+          "div",
+          { className: "container" },
+          _react2.default.createElement(
+            "p",
+            { className: "footer-text" },
+            "Coded by ",
+            _react2.default.createElement(
+              "a",
+              { href: "https://www.freecodecamp.com/dereje1", target: "_blank" },
+              "DGetahun"
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Footer;
+}(_react2.default.Component);
+
+exports.default = Footer;
 
 /***/ })
 /******/ ]);

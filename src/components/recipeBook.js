@@ -14,20 +14,22 @@ class RecipeBook extends React.Component{
   render(){
     if(this.props.recipes){//check if state is not empty
       return(
-        <Grid>
-          <Row>
-            <Col xs={12} sm={12} md={12} className="text-left">
-              <Recipes />
-            </Col>
-            <Col xs={12} sm={12} md={12}>
-              <UserModal editInfo={"Add Recipe"}/>
-            </Col>
-          </Row>
-        </Grid>
+        <div  style={{"backgroundColor":"black","paddingBottom":"10px"}}>
+          <Grid >
+            <Row style={{"marginTop":"10px"}}>
+              <Col xs={12} sm={12} md={12} className="text-left">
+                <Recipes />
+              </Col>
+              <Col xs={12} sm={12} md={12}>
+                <UserModal editInfo={"Add Recipe"}/>
+              </Col>
+            </Row>
+          </Grid>
+        </div>
       )
     }
     else{
-      return(<div>Getting Recipes</div>)
+      return(<div  style={{"backgroundColor":"black","paddingBottom":"10px"}}></div>)
     }
   }
 }
