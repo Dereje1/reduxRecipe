@@ -28,6 +28,10 @@ class UserModal extends React.Component{
     });
   }
   handleChange(){
+    let ingredientsSubmitted = findDOMNode(this.refs.ingredients).value.split(",")
+    ingredientsSubmitted = ingredientsSubmitted.filter(function(x){
+      return (x.trim()!=="");
+    })
     if(this.props.editInfo==="Add Recipe"){
         if(!findDOMNode(this.refs.recipe).value){
           this.close()
@@ -36,7 +40,7 @@ class UserModal extends React.Component{
         this.props.addRecipe([
           {
             name:findDOMNode(this.refs.recipe).value,
-            ingredients:findDOMNode(this.refs.ingredients).value.split(",")
+            ingredients:ingredientsSubmitted
           }
         ])
         this.close()
@@ -45,7 +49,7 @@ class UserModal extends React.Component{
       this.props.updateRecipe(
         {
           _id:this.props.editInfo,
-          ingredients:findDOMNode(this.refs.ingredients).value.split(",")
+          ingredients:ingredientsSubmitted
         }
       )
       this.close()

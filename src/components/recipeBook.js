@@ -14,7 +14,7 @@ class RecipeBook extends React.Component{
   render(){
     if(this.props.recipes){//check if state is not empty
       return(
-        <div  style={{"backgroundColor":"black","paddingBottom":"10px"}}>
+        <div  style={{"paddingBottom":"10px"}}>
           <Grid >
             <Row style={{"marginTop":"10px"}}>
               <Col xs={12} sm={12} md={12} className="text-left">

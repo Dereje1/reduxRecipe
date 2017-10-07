@@ -23029,6 +23029,10 @@ var UserModal = function (_React$Component) {
   }, {
     key: 'handleChange',
     value: function handleChange() {
+      var ingredientsSubmitted = (0, _reactDom.findDOMNode)(this.refs.ingredients).value.split(",");
+      ingredientsSubmitted = ingredientsSubmitted.filter(function (x) {
+        return x.trim() !== "";
+      });
       if (this.props.editInfo === "Add Recipe") {
         if (!(0, _reactDom.findDOMNode)(this.refs.recipe).value) {
           this.close();
@@ -23036,13 +23040,13 @@ var UserModal = function (_React$Component) {
         }
         this.props.addRecipe([{
           name: (0, _reactDom.findDOMNode)(this.refs.recipe).value,
-          ingredients: (0, _reactDom.findDOMNode)(this.refs.ingredients).value.split(",")
+          ingredients: ingredientsSubmitted
         }]);
         this.close();
       } else {
         this.props.updateRecipe({
           _id: this.props.editInfo,
-          ingredients: (0, _reactDom.findDOMNode)(this.refs.ingredients).value.split(",")
+          ingredients: ingredientsSubmitted
         });
         this.close();
       }
@@ -49071,7 +49075,7 @@ var RecipeBook = function (_React$Component) {
         //check if state is not empty
         return _react2.default.createElement(
           'div',
-          { style: { "backgroundColor": "black", "paddingBottom": "10px" } },
+          { style: { "paddingBottom": "10px" } },
           _react2.default.createElement(
             _reactBootstrap.Grid,
             null,
